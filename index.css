@@ -14,14 +14,15 @@ body {
     margin-bottom: 4px;
     border-radius: 8px 8px 0 0;
 }
-
+button {
+    cursor: pointer;
+}
 .btn {
     background: #5f9341;
     color: white;
     padding: 10px 15px;
     border: 1px solid #5f9341;
     font-weight: 600;
-    cursor: pointer;
     font-size: 12px;
     letter-spacing: 1px;
 }
@@ -91,7 +92,6 @@ hr {
     font-size: 12px;
     padding: 5px;
     background-color: #5f9341;
-    cursor: pointer;
     border-radius: 5px;
     border: none;
 }
@@ -103,8 +103,26 @@ hr {
     padding: 3px 4px;
     background: none;
     border: 2px solid transparent;
-    cursor: pointer;
 }
 .leads-group:hover, .active-btn {
     border-bottom: 2px solid #5f9341;
+}
+
+.remove-link-btn, .remove-group-btn {
+    background: none;
+    color: white;
+    border: none;
+    padding: 2px;
+}
+    .remove-link-btn:hover, .remove-group-btn:hover {
+        color: rgb(118, 118, 118);
+    }
+
+.remove-group-btn {
+    margin-left: 8px;
+}
+.fa-xmark {
+    font-size: 12px;
+    margin-left: 8px;
+    cursor: pointer;
 }

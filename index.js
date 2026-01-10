@@ -14,6 +14,7 @@ const addGrpBtn = document.getElementById("add-group")
 const inputGrp = document.getElementById("input-grp")
 const leadsContainer = document.getElementById("leads-group-container")
 const leadList = document.getElementById("list")
+const removeGroupBtn = document.getElementById("remove-group-btn")
 
 if (leadsGrpFromLocalStorage) {
     leadsGrp = leadsGrpFromLocalStorage
@@ -49,14 +50,40 @@ function renderGroup() {
             btn.classList.add("active-btn")
         }
 
+        if (key !== "default") {
+            const removeBtn = document.createElement("button")
+            removeBtn.className = "remove-group-btn"
+            removeBtn.dataset.group = key
+            removeBtn.title = "delete this group"
+            removeBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
+            
+            // Only show if this is the active group
+            if (key === activeGroup) {
+                removeBtn.style.display = "inline-block"
+            } else {
+                removeBtn.style.display = "none"
+            }
+            
+            btn.appendChild(removeBtn)
+        }
+
         btn.addEventListener("click", () => {
-            // Remove active class from all buttons
-            leadsContainer.querySelectorAll(".leads-group").forEach(b => b.classList.remove("active-btn"))
+            // Remove active class from all buttons and hide all remove buttons
+            leadsContainer.querySelectorAll(".leads-group").forEach(b => {
+                b.classList.remove("active-btn")
+                const rmBtn = b.querySelector(".remove-group-btn")
+                if (rmBtn) rmBtn.style.display = "none"
+            })
+            
+            // Add active class and show remove button for clicked group
             btn.classList.add("active-btn")
+            const rmBtn = btn.querySelector(".remove-group-btn")
+            if (rmBtn) rmBtn.style.display = "inline-block"
+            
             activeGroup = key
             groupLeadList(key)
         })
-
+       
         leadsContainer.appendChild(btn)
     })
 }
@@ -71,9 +98,9 @@ function groupLeadList(id) {
     leads.forEach((item, index) => {
         listItem += `<li>
             <a target='_blank' href='${item}'>${item}</a> 
-            <button class="remove-link-btn" data-group="${id}" data-index="${index}">
+            <span class="remove-link-btn" data-group="${id}" data-index="${index}" title="delete this link">
                 <i class="fa-solid fa-xmark"></i>
-            </button>
+            </span>
         </li>`
     })
     
@@ -83,7 +110,34 @@ function groupLeadList(id) {
     leadList.appendChild(ul)
 }
 
-leadList.addEventListener("click", (e) => { // removes link 
+leadsContainer.addEventListener("click", (e) => {
+    const removeBtn = e.target.closest(".remove-group-btn")
+
+    // remove group
+    if(removeBtn) {
+        e.stopPropagation()
+
+        const group = removeBtn.dataset.group
+
+        if (group === "default") return // incase
+
+        if (!confirm(`Delete group "${group}"?`)) return
+
+        delete leadsGrp[group]
+        localStorage.setItem("leadsGrp", JSON.stringify(leadsGrp))
+
+        // If the deleted group was active, switch to default
+        if (activeGroup === group) {
+            activeGroup = "default"
+            groupLeadList("default")
+        }
+
+        renderGroup()
+        return
+    }
+})
+
+leadList.addEventListener("click", (e) => { // removes link
     const remListBtn = e.target.closest(".remove-link-btn")
     if(!remListBtn) return
 
