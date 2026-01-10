@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    min-width: 400px;
+    background-color: #181C14;
+}
+
+#input-el {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #5f9341;
+    margin-bottom: 4px;
+    border-radius: 8px 8px 0 0;
+}
+
+.btn {
+    background: #5f9341;
+    color: white;
+    padding: 10px 15px;
+    border: 1px solid #5f9341;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+.btn:hover {
+    background-color: #314c21;
+    border: 1px solid #314c21;
+}
+
+#delete-btn {
+    background: #181C14;
+    color: #5f9341;
+}
+#delete-btn:hover {
+    background-color: darkred;
+    color: white;
+    border: 1px solid darkred;
+}
+
+ul {
+    margin-top: 20px;
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    margin-top: 5px;
+    color: #5f9341 ;
+}
+
+a {
+    color: #5f9341;
+}
+
+div.leads-group-container {
+    margin: 20px 0 10px;
+    display: flex;
+    height: 40px;
+    width: 400px;
+    align-items: start;
+    overflow-x: auto;
+}
+div.leads-group-container::-webkit-scrollbar {
+    height: 8px;
+}
+div.leads-group-container::-webkit-scrollbar-thumb {
+    background: #314c21;
+    border-radius: 10px;
+}
+
+#input-grp {
+    width: 100px;
+    height: 20px;
+    margin: 0 5px;
+    background: none;
+    color: white;
+    border: 1px solid white;
+}
+
+hr {
+    background-color: #314c21;
+    border: none;
+    height: 1.5px;
+}
+
+.add-group {
+    color: white;
+    font-size: 12px;
+    padding: 5px;
+    background-color: #5f9341;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+.leads-group {
+    margin: 0 5px;
+    color: white;
+    font-size: 14px;
+    padding: 3px 4px;
+    background: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+.leads-group:hover, .active-btn {
+    border-bottom: 2px solid #5f9341;
+}
