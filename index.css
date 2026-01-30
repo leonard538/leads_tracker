@@ -109,7 +109,10 @@ hr {
 .leads-group:hover, .active-btn {
     border-bottom: 2px solid #5f9341;
 }
-
+.link-list {
+    display: flex;
+    flex-wrap: nowrap;
+}
 .remove-link-btn, .remove-group-btn {
     background: none;
     color: white;
