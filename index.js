@@ -96,7 +96,7 @@ function groupLeadList(id) {
     leadList.innerHTML = ""
 
     leads.forEach((item, index) => {
-        listItem += `<li>
+        listItem += `<li class="link-list">
             <a target='_blank' href='${item}'>${item}</a> 
             <span class="remove-link-btn" data-group="${id}" data-index="${index}" title="delete this link">
                 <i class="fa-solid fa-xmark"></i>
