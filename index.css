@@ -105,6 +105,7 @@ hr {
     border: 2px solid transparent;
     display: flex;
     flex-wrap: nowrap;
+    white-space: nowrap;
 }
 .leads-group:hover, .active-btn {
     border-bottom: 2px solid #5f9341;
