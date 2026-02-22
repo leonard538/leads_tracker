@@ -1,7 +1,7 @@
 let leadsGrp = {
     default: []
 }
-let activeGroup = "default"  // Track the currently active group
+let activeGroup = localStorage.getItem("activeGroup") || "default"  // Track the currently active group
 
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
@@ -20,9 +20,15 @@ if (leadsGrpFromLocalStorage) {
     leadsGrp = leadsGrpFromLocalStorage
 }
 
+// Validate activeGroup exists, fallback to default if not
+if (!leadsGrp.hasOwnProperty(activeGroup)) {
+    activeGroup = "default"
+    localStorage.setItem("activeGroup", activeGroup)
+}
+
 // Always render groups (whether from localStorage or default)
 renderGroup()
-groupLeadList("default")
+groupLeadList(activeGroup)
 
 tabBtn.addEventListener("click", function(){    
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
@@ -81,6 +87,7 @@ function renderGroup() {
             if (rmBtn) rmBtn.style.display = "inline-block"
             
             activeGroup = key
+            localStorage.setItem("activeGroup", activeGroup)
             groupLeadList(key)
         })
        
@@ -129,6 +136,7 @@ leadsContainer.addEventListener("click", (e) => {
         // If the deleted group was active, switch to default
         if (activeGroup === group) {
             activeGroup = "default"
+            localStorage.setItem("activeGroup", activeGroup)
             groupLeadList("default")
         }
 
@@ -156,6 +164,7 @@ deleteBtn.addEventListener("dblclick", function() {
         default: []
     }
     activeGroup = "default"
+    localStorage.setItem("activeGroup", activeGroup)
     renderGroup()
     groupLeadList(activeGroup)
 })
